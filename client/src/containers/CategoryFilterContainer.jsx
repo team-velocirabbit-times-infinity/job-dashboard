@@ -24,7 +24,7 @@ const CategoryFilterContainer = () => {
           <Form.Select id="Title">
             <option>None</option>
             <option>Software Engineer</option>
-            <option>Fronend Engineer</option>
+            <option>Frontend Engineer</option>
             <option>Backend Engineer</option>
             <option>FullStack Enginner</option>
           </Form.Select>

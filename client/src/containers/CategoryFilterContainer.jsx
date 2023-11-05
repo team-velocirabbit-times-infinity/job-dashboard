@@ -15,6 +15,7 @@ const CategoryFilterContainer = () => {
         } else {
           setActiveButton(buttonType);
         }
+    };
 
     return (
     <div>
@@ -77,14 +78,3 @@ const CategoryFilterContainer = () => {
 export default CategoryFilterContainer;
 
 
-
-    //   <Form>
-    //     <Form.Group>
-    //         <Form.Control as="input" type="text" placeholder="Filter by:" />
-    //     </Form.Group>
-    //         <Button as="input" type="button" onClick={() => handleBurronClick('Title')}>Title</Button>
-    //         <Button as="input" type="button" onClick={() => handleButtonClick('Company')}>Company</Button>
-    //         <Button as="input" type="button" onClick={() => handleButtonClick('Salary Range')}>Salary Range</Button>
-    //         <Button as="input" type="button" onClick={() => handleButtonClick('Level')}>Level</Button>
-    //         <Button as="input" type="button" onClick={() => handleButtonClick('Status')}>Status</Button>
-    // </Form>

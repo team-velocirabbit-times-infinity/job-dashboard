@@ -61,4 +61,8 @@ listingController.addListing = (req, res, next) => {
     });
 };
 
+listingController.updateListing = (req, res, next) => {
+  
+}
+
 module.exports = listingController;

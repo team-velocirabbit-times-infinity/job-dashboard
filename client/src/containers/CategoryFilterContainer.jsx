@@ -10,9 +10,12 @@ const CategoryFilterContainer = () => {
     const [activeButton, setActiveButton] = useState(null);
 
     const handleButtonClick = (buttonType) => {
-      setActiveButton(buttonType);
-    };
-    
+        if (buttonType === activeButton) {
+          setActiveButton(null);
+        } else {
+          setActiveButton(buttonType);
+        }
+
     return (
     <div>
     <Form>
@@ -75,13 +78,13 @@ export default CategoryFilterContainer;
 
 
 
-{/* <Form>
-        <Form.Group>
-          <Form.Control as="filterform" rows={2} />
-          <Button as="input" type="Company" value="Submit" />{' '}
-          <Button as="input" type="Title" value="Submit" />{' '}
-          <Button as="input" type="Salary Range" value="Submit" />{' '}
-          <Button as="input" type="Level" value="Submit" />{' '}
-          <Button as="input" type="Status" value="Submit" />{' '}
-        </Form.Group>
-      </Form> */}
+    //   <Form>
+    //     <Form.Group>
+    //         <Form.Control as="input" type="text" placeholder="Filter by:" />
+    //     </Form.Group>
+    //         <Button as="input" type="button" onClick={() => handleBurronClick('Title')}>Title</Button>
+    //         <Button as="input" type="button" onClick={() => handleButtonClick('Company')}>Company</Button>
+    //         <Button as="input" type="button" onClick={() => handleButtonClick('Salary Range')}>Salary Range</Button>
+    //         <Button as="input" type="button" onClick={() => handleButtonClick('Level')}>Level</Button>
+    //         <Button as="input" type="button" onClick={() => handleButtonClick('Status')}>Status</Button>
+    // </Form>

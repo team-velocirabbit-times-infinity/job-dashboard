@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -10,23 +10,25 @@ const CategoryFilterContainer = () => {
     const [activeButton, setActiveButton] = useState(null);
 
     const handleButtonClick = (buttonType) => {
-        if (buttonType === activeButton) {
-          setActiveButton(null);
-        } else {
-          setActiveButton(buttonType);
-        }
+      setActiveButton(buttonType);
+
+        // if (buttonType === activeButton) {
+        //   setActiveButton(null);
+        // } else {
+        //   setActiveButton(buttonType);
+        // }
     };
 
     return (
     <div>
     <Form>
-        <Form.Group>
+        {/* <Form.Group>
             <Form.Control as="input" type="text" placeholder="Filter by:" />
-        </Form.Group>
-            <Button variant="primary" type="button" onClick={() => handleBurronClick('Title')}>Title</Button>
+        </Form.Group> */}
+            <Button variant="primary" type="button" onClick={() => handleButtonClick('Title')}>Title</Button>
             <Button variant="primary" type="button" onClick={() => handleButtonClick('Company')}>Company</Button>
             <Button variant="primary" type="button" onClick={() => handleButtonClick('Salary Range')}>Salary Range</Button>
-            <Button variant="primary" type="button" onClick={() => handleButtonClick('Level')}>Level</Button>
+            <Button variant="primary" type="submit" onClick={() => handleButtonClick('Level')}>Level</Button>
             <Button variant="primary" type="button" onClick={() => handleButtonClick('Status')}>Status</Button>
     </Form>
     {activeButton && (
@@ -74,6 +76,7 @@ const CategoryFilterContainer = () => {
     </div>
   );
 };
+
 
 export default CategoryFilterContainer;
 

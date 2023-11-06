@@ -5,7 +5,7 @@ const CategoryFilterContainer = () => {
   return (
 
     <Container className="filterDiv my-3 p-3 bg-light rounded">
-      <Stack direction="horizontal" gap={3}>
+      <Stack direction="horizontal" gap={2}>
 
           <Form.Label>Company: </Form.Label>
           <Form.Select id="Company">
@@ -34,13 +34,22 @@ const CategoryFilterContainer = () => {
             <option>Advanced</option>
           </Form.Select>
 
-          <Form.Label>Salary: </Form.Label>
-          <Form.Select id="Salary">
+          <Form.Label>Min Salary: </Form.Label>
+          <Form.Select id="minSalary">
             <option>None</option>
-            <option>$50,000+</option>
-            <option>$100,000+</option>
-            <option>$150,000+</option>
-            <option>$200,000+</option>
+            <option>$50,000</option>
+            <option>$100,000</option>
+            <option>$150,000</option>
+            <option>$200,000</option>
+          </Form.Select>
+
+          <Form.Label>Max Salary: </Form.Label>
+          <Form.Select id="maxSalary">
+            <option>None</option>
+            <option>$100,000</option>
+            <option>$150,000</option>
+            <option>$200,000</option>
+            <option>$250,000+</option>
           </Form.Select>
 
           <Form.Label>Type: </Form.Label>

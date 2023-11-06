@@ -53,7 +53,7 @@ const AddJobModal = (props) => {
   };
 
   return (
-    <Modal {...props} size='lg' arialabelledby='SearchModal' onHide={clear}>
+    <Modal {...props} size='lg' aria-labelled='SearchModal' onHide={clear}>
       <Form onSubmit={save}>
         <Modal.Header closeButton>
           <Modal.Title id='addJobModal'>
@@ -62,8 +62,8 @@ const AddJobModal = (props) => {
         </Modal.Header>
 
         <Modal.Body>
-          <Form.Group controlId='inputJobTitle'>
-            <Form.Label>Job Title</Form.Label>
+          <Form.Group controlId='inputJobTitle' className='mb-2'>
+            <Form.Label>Job Title :</Form.Label>
             <Form.Control 
               type='text'
               name='jobTitle'
@@ -74,8 +74,8 @@ const AddJobModal = (props) => {
             />
           </Form.Group>
 
-          <Form.Group controlId='inputCompany'>
-            <Form.Label>Company Name</Form.Label>
+          <Form.Group controlId='inputCompany' className='mb-2'>
+            <Form.Label>Company Name :</Form.Label>
             <Form.Control
               type='text'
               name='companyName'
@@ -87,7 +87,7 @@ const AddJobModal = (props) => {
           </Form.Group>
 
           <Form.Group controlId='appStatus'>
-            <Form.Label>Application Status</Form.Label>
+            <Form.Label>Application Status :</Form.Label>
             <Form.Select
               aria-label='select'
               value={selectedStatus}
@@ -107,7 +107,7 @@ const AddJobModal = (props) => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Location</Form.Label>
+            <Form.Label>Location :</Form.Label>
             <Form.Control
               type='text'
               name='jobLocation'
@@ -119,7 +119,7 @@ const AddJobModal = (props) => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Job Post Url</Form.Label>
+            <Form.Label>Job Post Url :</Form.Label>
             <Form.Control
               type='text'
               name='jobUrl'
@@ -130,7 +130,7 @@ const AddJobModal = (props) => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Salary Range</Form.Label>
+            <Form.Label>Salary Range :</Form.Label>
             <Form.Control
               type='text'
               name='salaryRange'

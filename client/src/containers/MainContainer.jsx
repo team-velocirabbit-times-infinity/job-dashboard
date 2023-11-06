@@ -5,14 +5,14 @@ import React from 'react';
 
 import SearchContainer from './SearchContainer';
 import CategoryFilterContainer from './CategoryFilterContainer';
-// import JobListingContainer from './JobListingContainerContainer';
+import JobListingContainer from './JobListingContainer';
 
 function MainContainer() {
   return (
     <Container>
       <SearchContainer />
       <CategoryFilterContainer />
-      {/* <JobListingContainer /> */}
+      <JobListingContainer />
     </Container>
   );
 }

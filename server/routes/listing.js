@@ -4,11 +4,12 @@ const listingController = require('../controllers/listingController');
 
 const router = express.Router();
 
+
+// edit: will probably need to change response to an object with keys matched to frontend
 router.get('/', listingController.getAllListings, (req, res) => {
   return res.status(200).json(res.locals.listings)
 });
 
-//insert a filter route
 router.get('/filter', listingController.filterListing, (req, res) => {
   return res.status(200).json(res.locals.filteredListing)
 })

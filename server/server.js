@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-
+const cors = require('cors');
 const app = express();
 
 // import routers here
@@ -11,6 +11,7 @@ const PORT = 3000;
 // handle parsing request body
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
 // define route handlers here
 app.use('/listing', listingRouter);
@@ -27,7 +28,7 @@ app.use('/listing', listingRouter);
 // });
 
 // Serve any static files
-app.use(express.static(path.join(__dirname, '/../public/')));
+// app.use(express.static(path.join(__dirname, '/../public/')));
 
 // Handle React routing, return all requests to React app
 // app.get('*', function(req, res) {
@@ -35,11 +36,11 @@ app.use(express.static(path.join(__dirname, '/../public/')));
 // });
 
 // default route, serve html
-app.get('/', (req, res) => {
-  return res
-    .status(200)
-    .sendFile(path.join(__dirname, '/../public/index.html'));
-});
+// app.get('/', (req, res) => {
+//   return res
+//     .status(200)
+//     .sendFile(path.join(__dirname, '/../public/index.html'));
+// });
 
 
 // catch-all route handler for any requests to an unknown route

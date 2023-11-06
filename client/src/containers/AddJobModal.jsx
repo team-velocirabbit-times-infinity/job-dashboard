@@ -16,6 +16,7 @@ const AddJobModal = (props) => {
   const [maxSalary, setMaxSalary] = useState('');
   const [level, setLevel] = useState('');
 
+
   // declare 'clear' function that will reset to default
   const clear = () => {
     setJobTitle('');
@@ -42,6 +43,7 @@ const AddJobModal = (props) => {
       maxSalary: maxSalary,
       level: level,
       hours: hours,
+
     };
 
     console.log('hello')

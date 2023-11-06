@@ -7,7 +7,7 @@
 -- two dots ('..' - without quotes).
 
 CREATE TABLE Users (
-    "userId" int   NOT NULL,
+    "userId" integer   NOT NULL,
     "firstName" varchar(255)   NOT NULL,
     "lastName" varchar(255)   NOT NULL,
     "username" varchar(64)   NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Listings (
-    "listingId" int   NOT NULL,
+    "listingId" integer   NOT NULL,
     "title" varchar(255)   NOT NULL,
     "company" varchar(255)   NOT NULL,
     "level" varchar(255)   NULL,
@@ -33,8 +33,10 @@ CREATE TABLE Listings (
     CONSTRAINT "pk_Listing" PRIMARY KEY ("listingId")
 );
 
-ALTER TABLE "Listing" ADD CONSTRAINT "fk_Listing_userId" FOREIGN KEY("userId")
+ALTER TABLE "Listings" ADD CONSTRAINT "fk_Listing_userId" FOREIGN KEY("userId")
 REFERENCES "User" ("userId");
+
+
 
 INSERT INTO Users VALUES
 (1, 'Tester', 'Testing', 'tester123', 'tester123@someemail.com', 'password987');

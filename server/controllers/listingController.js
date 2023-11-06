@@ -1,5 +1,4 @@
 const db = require('../models/listingModel');
-// const { param } = require('../server');
 
 const listingController = {};
 

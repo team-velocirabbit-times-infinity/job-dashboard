@@ -8,6 +8,8 @@ router.get('/', listingController.getAllListings, (req, res) => {
   return res.status(200).json(res.locals.listings)
 });
 
+//insert a filter route
+
 router.post('/', listingController.addListing, (req, res) => {
   return res.status(200).json(res.locals.newListing);
 });

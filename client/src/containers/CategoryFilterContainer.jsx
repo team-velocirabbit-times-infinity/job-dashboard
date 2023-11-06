@@ -1,14 +1,12 @@
 import React from 'react';
-import { Container, Form, Row, Col } from 'react-bootstrap';
+import { Container, Form, Stack } from 'react-bootstrap';
 
 const CategoryFilterContainer = () => {
   return (
-  <div>
-    <Container className="filterDiv">
 
-      <Row className="filterbar">
+    <Container className="filterDiv my-3 p-3 bg-light rounded">
+      <Stack direction="horizontal" gap={3}>
 
-        <Col md={2} className="filter">
           <Form.Label>Company: </Form.Label>
           <Form.Select id="Company">
             <option>None</option>
@@ -17,20 +15,16 @@ const CategoryFilterContainer = () => {
             <option>Linkedin</option>
             <option>Github</option>
           </Form.Select>
-        </Col>
 
-        <Col md={2} className="filter">
           <Form.Label>Title: </Form.Label>
           <Form.Select id="Title">
             <option>None</option>
-            <option>Software Engineer</option>
-            <option>Frontend Engineer</option>
-            <option>Backend Engineer</option>
-            <option>FullStack Enginner</option>
+            <option>Web Developer</option>
+            <option>Frontend Eng</option>
+            <option>Backend Eng</option>
+            <option>Fullstack Eng</option>
           </Form.Select>
-        </Col>
 
-        <Col md={2} className="filter">
           <Form.Label>Level: </Form.Label>
           <Form.Select id="Level">
             <option>None</option>
@@ -39,9 +33,7 @@ const CategoryFilterContainer = () => {
             <option>Senior</option>
             <option>Advanced</option>
           </Form.Select>
-        </Col>
 
-        <Col md={2} className="filter">
           <Form.Label>Salary: </Form.Label>
           <Form.Select id="Salary">
             <option>None</option>
@@ -50,9 +42,7 @@ const CategoryFilterContainer = () => {
             <option>$150,000+</option>
             <option>$200,000+</option>
           </Form.Select>
-        </Col>
 
-        <Col md={2} className="filter">
           <Form.Label>Type: </Form.Label>
           <Form.Select id="Type">
             <option>None</option>
@@ -61,14 +51,12 @@ const CategoryFilterContainer = () => {
             <option>Remote</option>
             <option>Contract</option>
           </Form.Select>
-        </Col>
-        
-        <div className="clear">Clear All</div>
 
-      </Row>
-    
+          {/* <div className="clear">Clear All</div> */}
+
+      </Stack>
     </Container>
-  </div>
+
   );
 };
 

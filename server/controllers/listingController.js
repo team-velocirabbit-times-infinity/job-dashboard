@@ -1,5 +1,5 @@
 const db = require('../models/listingModel');
-const { param } = require('../server');
+// const { param } = require('../server');
 
 const listingController = {};
 
@@ -14,8 +14,11 @@ listingController.getAllListings = (req, res, next) => {
       return next();
     })
     .catch((err) => {
-      console.log(err)
-      return next(err);
+      return next({
+        log: 'listingController.getAllListings',
+        status: 500,
+        message: {err: 'couldn\'t get all listings'}
+      });
     });
 };
 
@@ -57,8 +60,11 @@ listingController.addListing = (req, res, next) => {
       return next();
     })
     .catch((err) => {
-      console.log(err);
-      return next(err);
+      return next({
+        log: 'listingController.addListing',
+        status: 500,
+        message: {err: 'couldn\'t add new listing'}
+      });
     });
 };
 
@@ -113,7 +119,11 @@ listingController.updateListing = (req, res, next) => {
       return next();
     })
     .catch(err => {
-      return next(err);
+      return next({
+        log: 'listingController.updateListing',
+        status: 500,
+        message: {err: 'couldn\'t update selected listing'}
+      });
     })
   //end
 }
@@ -135,9 +145,41 @@ listingController.deleteListing = (req, res, next) => {
       return next();
     })
     .catch(err => {
-      return next(err);
+      return next({
+        log: 'listingController.deleteListing',
+        status: 500,
+        message: {err: 'couldn\'t delete selected listing'}
+      });
     })
 }
 //end
+
+
+// need a filter middleware, need to ask front end how it will looks like 
+listingController.filterListing = (req, res, next) => {
+  // https://example.com/search?q=javascript&page=2, the req.query object would be { q: 'javascript', f: '2' }.
+  const searchTerm = req.query.q;
+  const filter = req.query.f;
+  console.log('searchTerm = ', searchTerm);
+  // NEED EDIT: filter query will prob look diff, might need diff filter options/middleware
+  const filterQuery = `
+  SELECT * FROM listings
+  WHERE "$1" = $2
+  `
+  const params = [searchTerm, filter]
+  db.query(filterQuery, params)
+    .then(data => {
+      res.locals.filteredListing = data.rows;
+      console.log('filtered data looks like this: ',data.rows)
+      return next();
+    })
+    .catch(err => {
+      return next({
+        log: 'listingController.filterListing',
+        status: 500,
+        message: {err: 'couldn\'t retrieve selected listing'}
+      });
+    })
+}
 
 module.exports = listingController;

@@ -1,4 +1,5 @@
 const db = require('../models/listingModel');
+const { param } = require('../server');
 
 const listingController = {};
 
@@ -62,7 +63,81 @@ listingController.addListing = (req, res, next) => {
 };
 
 listingController.updateListing = (req, res, next) => {
-  
+  //start
+  const { listingId } = req.query;
+  const {
+    title,
+    company,
+    level,
+    hours,
+    minSalary,
+    maxSalary,
+    location,
+    status,
+    url,
+    // userId,
+  } = req.body;
+
+  console.log('req.query = ',req.query)
+  console.log('req.body = ',req.body)
+  const updateQuery = `
+  UPDATE listings
+  SET
+    title = $2,
+    company = $3,
+    level = $4,
+    hours = $5,
+    "minSalary" = $6,
+    "maxSalary" = $7,
+    location = $8,
+    status = $9
+  WHERE "listingId" = $1
+  RETURNING *;
+  `;
+  const params = [
+    listingId,
+    title,
+    company,
+    level,
+    hours,
+    minSalary,
+    maxSalary,
+    location,
+    status
+  ]
+  db.query(updateQuery, params)
+    .then(data => {
+      res.locals.updatedListing = data.rows[0];
+      console.log('Updated data looks like this: ',data.rows[0])
+      console.log(`${data.rowCount} row(s) updated`)
+      return next();
+    })
+    .catch(err => {
+      return next(err);
+    })
+  //end
 }
+//start
+listingController.deleteListing = (req, res, next) => {
+  const { listingId } =  req.query;
+  console.log(`listingId = `, listingId)
+  const deleteQuery = `
+  DELETE FROM listings
+  WHERE "listingId" = $1
+  RETURNING *;
+  `;
+  const params = [listingId];
+  db.query(deleteQuery, params)
+    .then(data => {
+      console.log('Deleted data looks like this: ', data.rows[0])
+      console.log(`${data.rowCount} row(s) deleted`);
+      res.locals.deletedListing = data.rows[0];
+      return next();
+    })
+    .catch(err => {
+      return next(err);
+    })
+}
+//end
 
 module.exports = listingController;

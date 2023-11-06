@@ -8,7 +8,7 @@ listingController.getAllListings = (req, res, next) => {
   `;
   db.query(listingsQuery)
     .then((listingsData) => {
-      console.log(listingsData.rows);
+      // console.log(listingsData.rows);
       res.locals.listings = listingsData.rows;
       return next();
     })

@@ -5,16 +5,7 @@ const CategoryFilterContainer = () => {
   return (
 
     <Container className="filterDiv my-3 p-3 bg-light rounded">
-      <Stack direction="horizontal" gap={2}>
-
-          <Form.Label>Company: </Form.Label>
-          <Form.Select id="Company">
-            <option>None</option>
-            <option>Google</option>
-            <option>Apple</option>
-            <option>Linkedin</option>
-            <option>Github</option>
-          </Form.Select>
+      <Stack direction="horizontal" gap={3}>
 
           <Form.Label>Title: </Form.Label>
           <Form.Select id="Title">
@@ -23,6 +14,15 @@ const CategoryFilterContainer = () => {
             <option>Frontend Eng</option>
             <option>Backend Eng</option>
             <option>Fullstack Eng</option>
+          </Form.Select>
+
+          <Form.Label>Company: </Form.Label>
+          <Form.Select id="Company">
+            <option>None</option>
+            <option>Google</option>
+            <option>Apple</option>
+            <option>Linkedin</option>
+            <option>Github</option>
           </Form.Select>
 
           <Form.Label>Level: </Form.Label>
@@ -34,23 +34,23 @@ const CategoryFilterContainer = () => {
             <option>Advanced</option>
           </Form.Select>
 
-          <Form.Label>Min Salary: </Form.Label>
+          <Form.Label>Salary: </Form.Label>
           <Form.Select id="minSalary">
             <option>None</option>
-            <option>$50,000</option>
-            <option>$100,000</option>
-            <option>$150,000</option>
-            <option>$200,000</option>
+            <option>$50,000+</option>
+            <option>$100,000+</option>
+            <option>$150,000+</option>
+            <option>$200,000+</option>
           </Form.Select>
 
-          <Form.Label>Max Salary: </Form.Label>
+          {/* <Form.Label>Max Salary: </Form.Label>
           <Form.Select id="maxSalary">
             <option>None</option>
             <option>$100,000</option>
             <option>$150,000</option>
             <option>$200,000</option>
             <option>$250,000+</option>
-          </Form.Select>
+          </Form.Select> */}
 
           <Form.Label>Type: </Form.Label>
           <Form.Select id="Type">

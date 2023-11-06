@@ -4,10 +4,10 @@ import { Modal } from 'react-bootstrap';
 const JobListingModal = ({ show, selectedJob, handleCloseModal }) => {
     return (
         // <Modal show={selectedJob !== null} onHide={handleCloseModal}>
-        <Modal show={show} onHide={handleCloseModal}>  // Pegah
+        <Modal show={show} onHide={handleCloseModal}> 
         <Modal.Header closeButton>
           {/* <Modal.Title>{selectedJob ? selectedJob.position : ""}</Modal.Title> */}
-          <Modal.Title>{selectedJob?.position || ''}</Modal.Title>  // Pegah
+          <Modal.Title>{selectedJob?.position || ''}</Modal.Title>  
         </Modal.Header>
         <Modal.Body>
           {/* <p>Company: {selectedJob.company}</p>

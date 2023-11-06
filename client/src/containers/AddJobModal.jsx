@@ -1,35 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-// import {toast} from 'react-toastify';
-// import {useMutation, useClient} from 'react-query';
-// import * as api from ''; // need to double check with backend team
+import axios from 'axios';
 
 const AddJobModal = (props) => {
   // create state for each form group
   const [jobTitle, setJobTitle] = useState('');
   const [companyName, setCompanyName] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState(''); 
+  const [selectedStatus, setSelectedStatus] = useState('');
   const [jobLocation, setJobLocation] = useState('');
   const [jobUrl, setJobUrl] = useState('');
+  const [hours, setHours] = useState('');
   const [minSalary, setMinSalary] = useState('');
   const [maxSalary, setMaxSalary] = useState('');
   const [level, setLevel] = useState('');
-  const [hours, setHours] = useState('');
 
-  // declare 'createJobMutation' func to add job to database
-  // const createJobMutation = useMutation(api.createJob, {
-  //   onError: (err) => {
-  //     console.error(err);
-  //     toast.error('Could not save job.');
-  //   },
-  //   onSuccess: (data) => {
-  //     queryClient.invalidateQueries('jobs');
-  //     toast.success(`Job: ${data['title']} is saved!`);
-  //     clear();
-  //   }
-  // });
 
   // declare 'clear' function that will reset to default
   const clear = () => {
@@ -48,32 +34,36 @@ const AddJobModal = (props) => {
   const save = (e) => {
     e.preventDefault();
     const payload = {
-      'title': jobTitle,
-      'company': companyName,
-      'status': selectedStatus,
-      'location': jobLocation,
-      'url': jobUrl,
-      'minSalary': minSalary,
-      'maxSalary': maxSalary,
-      'level': level,
-      'hours': hours
+      title: jobTitle,
+      company: companyName,
+      status: selectedStatus,
+      location: jobLocation,
+      url: jobUrl,
+      minSalary: minSalary,
+      maxSalary: maxSalary,
+      level: level,
+      hours: hours,
+
     };
-    // createJobMutation.mutate(payload);
+
+    console.log('hello')
+
+    // axios
+    //   .post('http://localhost:3000/listing/', payload)
+    //   .catch((err) => console.log(err));
   };
 
   return (
-    <Modal {...props} size='lg' aria-labelled='SearchModal' onHide={clear}>
+    <Modal {...props} size='lg' onHide={clear}>
       <Form onSubmit={save}>
         <Modal.Header closeButton>
-          <Modal.Title id='addJobModal'>
-            Add a new job
-          </Modal.Title>
+          <Modal.Title id='addJobModal'>Add a new job</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <Form.Group controlId='inputJobTitle' className='mb-2'>
             <Form.Label>Job Title :</Form.Label>
-            <Form.Control 
+            <Form.Control
               type='text'
               name='jobTitle'
               placeholder='Enter job title'
@@ -163,20 +153,35 @@ const AddJobModal = (props) => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Salary Range :</Form.Label>
+            <Form.Label>Min Salary :</Form.Label>
             <Form.Control
               type='text'
-              name='salaryRange'
-              placeholder='Enter a salary range'
-              value={salaryRange}
-              onChange={(e) => setSalaryRange(e.target.value)}
+              name='minSalary'
+              placeholder='Enter a min salary'
+              value={minSalary}
+              onChange={(e) => setMinSalary(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Max Salary :</Form.Label>
+            <Form.Control
+              type='text'
+              name='maxSalary'
+              placeholder='Enter a max salary'
+              value={maxSalary}
+              onChange={(e) => setMaxSalary(e.target.value)}
             />
           </Form.Group>
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant='secondary' onClick={clear}>Cancel</Button>
-          <Button variant='primary' type='submit'>Save</Button>
+          <Button variant='secondary' onClick={clear}>
+            Cancel
+          </Button>
+          <Button variant='primary' type='submit'>
+            Save
+          </Button>
         </Modal.Footer>
       </Form>
     </Modal>

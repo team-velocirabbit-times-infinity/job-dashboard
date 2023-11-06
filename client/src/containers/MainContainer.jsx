@@ -4,15 +4,15 @@ import React from 'react';
 // import Col from 'react-bootstrap/Col';
 
 import SearchContainer from './SearchContainer';
-// import CategoryFilterContainer from './CategoryFilterContainerContainer';
+import CategoryFilterContainer from './CategoryFilterContainer';
 // import JobListingContainer from './JobListingContainerContainer';
 
 function MainContainer() {
   return (
     <Container>
       <SearchContainer />
-      {/* <CategoryFilterContainer />
-      <JobListingContainer /> */}
+      <CategoryFilterContainer />
+      {/* <JobListingContainer /> */}
     </Container>
   );
 }

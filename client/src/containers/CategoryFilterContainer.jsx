@@ -36,7 +36,7 @@ const CategoryFilterContainer = () => {
             <option>None</option>
             <option>Internship</option>
             <option>Entry Level</option>
-            <option>Senoir</option>
+            <option>Senior</option>
             <option>Advanced</option>
           </Form.Select>
         </Col>

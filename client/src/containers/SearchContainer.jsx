@@ -8,14 +8,22 @@ import Button from 'react-bootstrap/Button';
 // import InputGroup from 'react-bootstrap/InputGroup';
 import Stack from 'react-bootstrap/Stack';
 
+import AddJobModal from './AddJobModal';
+
 const SearchContainer = () => {
   // create State to show AddJobModal
-  const [showAddJobModal, setAddJobModal] = useState(false);
+  const [showAddJobModal, setShowAddJobModal] = useState(false);
   // create State for input in Search
   const [input, setInput] = useState('');
-  
+
+
   return (
     <>
+      <AddJobModal
+        show={showAddJobModal}
+        onHide={() => setShowAddJobModal(false)}
+      />
+
       <Stack direction='horizontal' gap={3}>
         <Form.Control 
           className='me-auto' 
@@ -28,7 +36,7 @@ const SearchContainer = () => {
           size='md'
           variant='primary'
           id='add-job-btn'
-          onClick={() => setAddJobModal(true)}
+          onClick={() => setShowAddJobModal(true)}
         >
           Add New Job
         </Button>

@@ -14,7 +14,7 @@ const CategoryFilterContainer = () => {
             <option>None</option>
             <option>Google</option>
             <option>Apple</option>
-            <option>Lindklin</option>
+            <option>Linkdin</option>
             <option>Github</option>
           </Form.Select>
         </Col>

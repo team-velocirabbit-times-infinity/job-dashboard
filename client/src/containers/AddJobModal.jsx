@@ -13,7 +13,10 @@ const AddJobModal = (props) => {
   const [selectedStatus, setSelectedStatus] = useState(''); 
   const [jobLocation, setJobLocation] = useState('');
   const [jobUrl, setJobUrl] = useState('');
-  const [salaryRange, setSalaryRange] = useState('');
+  const [minSalary, setMinSalary] = useState('');
+  const [maxSalary, setMaxSalary] = useState('');
+  const [level, setLevel] = useState('');
+  const [hours, setHours] = useState('');
 
   // declare 'createJobMutation' func to add job to database
   // const createJobMutation = useMutation(api.createJob, {
@@ -34,7 +37,10 @@ const AddJobModal = (props) => {
     setCompanyName('');
     setJobLocation('');
     setJobUrl('');
-    setSalaryRange('');
+    setMinSalary('');
+    setMaxSalary('');
+    setLevel('');
+    setHours('');
     props.onHide();
   };
 
@@ -47,7 +53,10 @@ const AddJobModal = (props) => {
       'status': selectedStatus,
       'location': jobLocation,
       'url': jobUrl,
-      'salary': salaryRange
+      'minSalary': minSalary,
+      'maxSalary': maxSalary,
+      'level': level,
+      'hours': hours
     };
     // createJobMutation.mutate(payload);
   };
@@ -83,6 +92,30 @@ const AddJobModal = (props) => {
               value={companyName}
               required
               onChange={(e) => setCompanyName(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId='inputLevel'>
+            <Form.Label>Level :</Form.Label>
+            <Form.Control
+              type='text'
+              name='inputLevel'
+              placeholder='Enter job level'
+              value={level}
+              required
+              onChange={(e) => setLevel(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId='inputHours'>
+            <Form.Label>Hours :</Form.Label>
+            <Form.Control
+              type='text'
+              name='inputHours'
+              placeholder='Enter hours'
+              value={hours}
+              required
+              onChange={(e) => setHours(e.target.value)}
             />
           </Form.Group>
 

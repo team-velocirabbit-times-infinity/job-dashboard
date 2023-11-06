@@ -15,12 +15,32 @@ app.use(express.urlencoded({extended: true}));
 // define route handlers here
 app.use('/listing', listingRouter);
 
+
+// not sure if needed
+// app.use('/public', express.static(path.join(__dirname, '/../public/bundle.js')));
+
+// // default route, serve html
+// app.get('/', (req, res) => {
+//   return res
+//     .status(200)
+//     .sendFile(path.join(__dirname, '/../public/index.html'));
+// });
+
+// Serve any static files
+app.use(express.static(path.join(__dirname, '/../public/')));
+
+// Handle React routing, return all requests to React app
+// app.get('*', function(req, res) {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
+
 // default route, serve html
 app.get('/', (req, res) => {
   return res
     .status(200)
     .sendFile(path.join(__dirname, '/../public/index.html'));
 });
+
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) =>

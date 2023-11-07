@@ -71,7 +71,7 @@ listingController.addListing = (req, res, next) => {
 
 listingController.updateListing = (req, res, next) => {
   //start
-  const {listingId} = req.query;
+  const listingId = req.query.id;
   const {
     title,
     company,
@@ -130,7 +130,7 @@ listingController.updateListing = (req, res, next) => {
 };
 //start
 listingController.deleteListing = (req, res, next) => {
-  const {listingId} = req.query;
+  const listingId = req.query.id;
   console.log(`listingId = `, listingId);
   const deleteQuery = `
   DELETE FROM listings

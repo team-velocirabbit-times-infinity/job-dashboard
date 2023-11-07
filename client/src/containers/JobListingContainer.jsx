@@ -31,7 +31,7 @@ const JobListingContainer = () => {
   };
 
   const handleCloseModal = () => {
-    setSelectedJob(null);
+    // setSelectedJob(null);
     setShowJobModal(false);
   };
 

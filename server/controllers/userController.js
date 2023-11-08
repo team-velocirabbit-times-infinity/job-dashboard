@@ -1,50 +1,48 @@
-const db = require('../models/listingModel');
+const User = require('../models/userModel');
 
 const userController = {};
+userController.getAllUsers = async (req,res, next) => {
+  await User.findAll()
+  .then(users => {
+    res.locals.users = users;
+    next();
+  })
+  .catch(err => {
+    console.log(err);
+    return next({
+      log: 'userController.getAllUsers',
+      status: 500,
+      message: {err: "couldn't get users"},
+    })
+  })
+}
 
-userController.addUser = (req, res, next) => {
+userController.addUser = async (req, res, next) => {
   const {
     // userId,
     firstName,
     lastName,
-    userName,
+    username,
     email,
     password,
   } = req.body;
-  const newUserQuery = `
-  INSERT INTO users (firstName, lastName, userName, email, password,)
-  VALUES($1, $2, $3, $4, $5)
-  RETURNING *;
-  `;
+
+  await User.create({firstName, lastName, username, email, password})
+  .then(newUser => {
+    res.locals.newuser = newUser;
+    next();
+  })
+  .catch((err) => {
+    console.log(err);
+    return next({
+      log: 'userController.addUser',
+      status: 500,
+      message: {err: "couldn't add new user"},
+    });
+  });
+}
 
   // default status is not started. userId hardcoded to 1 for now
-  const params = [
-    title,
-    company,
-    level,
-    hours,
-    minSalary,
-    maxSalary,
-    location,
-    'Not started',
-    url,
-    1,
-  ];
-
-  db.query(newListingQuery, params)
-    .then((data) => {
-      res.locals.newListing = data.rows[0];
-      return next();
-    })
-    .catch((err) => {
-      console.log(err);
-      return next({
-        log: 'listingController.addListing',
-        status: 500,
-        message: {err: "couldn't add new listing"},
-      });
-    });
-};
 
 
 

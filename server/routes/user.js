@@ -7,11 +7,11 @@ const usersRouter = express.Router();
 
 // edit: will probably need to change response to an object with keys matched to frontend
 // don't use this // no need to get all users:)
-// usersRouter.get('/', userController.getAllusers, (req, res) => {
-//   return res.status(200).json(res.locals.users);
-// });
+usersRouter.get('/', userController.getAllUsers, (req, res) => {
+  return res.status(200).json(res.locals.users);
+});
 
-// // create new user
+// // // create new user
 usersRouter.post('/', userController.addUser, (req, res) => {
   return res.status(200).json(res.locals.newuser);
 });

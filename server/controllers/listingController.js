@@ -25,14 +25,14 @@ listingController.addListing = async (req, res, next) => {
     company,
     level,
     hours,
-    minSalary,
-    maxSalary,
+    minsalary,
+    maxsalary,
     location,
     status,
     url,
     userId,
   } = req.body;
-  await Listing.create({title, company, level, hours, minSalary, maxSalary, location, status, url, userId: 1})
+  await Listing.create({title, company, level, hours, minsalary, maxsalary, location, status, url, userId: 1})
   .then(data => {
     res.locals.newListing = data;
     next();

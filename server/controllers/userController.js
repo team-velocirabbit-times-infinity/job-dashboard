@@ -20,14 +20,14 @@ userController.getAllUsers = async (req,res, next) => {
 userController.addUser = async (req, res, next) => {
   const {
     // userId,
-    firstName,
-    lastName,
+    firstname,
+    lastname,
     username,
     email,
     password,
   } = req.body;
 
-  await User.create({firstName, lastName, username, email, password})
+  await User.create({firstname, lastname, username, email, password})
   .then(newUser => {
     res.locals.newuser = newUser;
     next();

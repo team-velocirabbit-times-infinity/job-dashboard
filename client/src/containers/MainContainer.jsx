@@ -1,8 +1,5 @@
 import Container from 'react-bootstrap/Container';
 import React from 'react';
-import { useState, useEffect } from 'react';
-// import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
 
 import SearchContainer from './SearchContainer';
 import CategoryFilterContainer from './CategoryFilterContainer';

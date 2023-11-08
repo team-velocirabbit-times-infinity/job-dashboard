@@ -19,11 +19,6 @@ const SearchContainer = () => {
 
   return (
     <>
-      {/* <AddJobModal
-        show={showAddJobModal}
-        onHide={() => setShowAddJobModal(false)}
-      /> */}
-
       <Stack direction='horizontal' gap={3}>
         <Form.Control 
           className='me-auto' 
@@ -31,15 +26,6 @@ const SearchContainer = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        {/* <Button 
-          className='float-end'
-          size='md'
-          variant='primary'
-          id='add-job-btn'
-          onClick={() => setShowAddJobModal(true)}
-        >
-          Add New Job
-        </Button> */}
       </Stack>
     </>
   );

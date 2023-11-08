@@ -25,12 +25,23 @@ We also added user CRUD-functionality with a schema, server routes, and controll
 - Built a User Schema and corrolating Controllers.
 - Built out login authentication (\*\*include aspects here).
 
+## Improvements:
+
+- Improved code quality by deleting nonfunctional code and creating consistent variable names for easier data flow tracking.
+- Improved functionality on dashboard by:
+  - moving 'Add New Job' from next to search bar to on the top of the Listings Feed for better user-functionality
+  - created automatic closing for the Job Modal once the 'Save' button is clicked
+  - getAllListings is now linked to a useState where the listings refresh and aree updated once the Job Modal closes
+- Improved user and listing data storage and retrieval by:
+  - initilized a new database to connect with and sequalized our schemas for easier readability on queries
+  - updated controllers for Listings, and created controllers for Users
+
 ## Technology Used:
 
 - React
 - React Router
 - Redux
-- PostgreSQL
+- PostgreSQL/Sequalized
 - Bootstrap
 - Express
 - Webpack

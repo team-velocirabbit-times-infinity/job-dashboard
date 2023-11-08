@@ -5,6 +5,7 @@ const app = express();
 
 // import routers here
 const listingRouter = require('./routes/listing');
+const userRouter = require('./routes/user');
 
 const PORT = 3000;
 
@@ -15,7 +16,7 @@ app.use(cors());
 
 // define route handlers here
 app.use('/listing', listingRouter);
-
+app.use('/users', userRouter);
 
 // not sure if needed
 // app.use('/public', express.static(path.join(__dirname, '/../public/bundle.js')));

@@ -11,16 +11,17 @@ const JobListingContainer = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [showJobModal, setShowJobModal] = useState(false);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/listing/');
+      const data = await response.json();
+      setJobs(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/listing/');
-        const data = await response.json();
-        setJobs(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
     fetchData();
   }, []);
 
@@ -79,7 +80,8 @@ const JobListingContainer = () => {
     setMaxSalary("");
     setLevel("");
     setHours("");
-    props.onHide();
+    setShowAddJobModal(false);
+    // props.onHide();
   };
 
 
@@ -102,16 +104,16 @@ const JobListingContainer = () => {
     axios
       .post("http://localhost:3000/listing/", payload)
       .then((res) => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch('http://localhost:3000/listing/');
-            const data = await response.json();
-            setJobs(data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
         fetchData();
+        setJobTitle("");
+        setCompanyName("");
+        setJobLocation("");
+        setJobUrl("");
+        setMinSalary("");
+        setMaxSalary("");
+        setLevel("");
+        setHours("");
+        setShowAddJobModal(false);
       })
       .catch((err) => console.log(err));
   };

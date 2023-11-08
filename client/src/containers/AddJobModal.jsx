@@ -1,80 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import axios from "axios";
 
 const AddJobModal = ({
   jobTitle,
-  companyName,
-  selectedStatus,
-  jobLocation,
-  jobUrl,
-  hours,
-  minSalary,
-  maxSalary,
-  level,
   jobTitleChangeHandler,
+  companyName,
   companyNameChangeHandler,
+  selectedStatus,
   selectedStatusChangeHandler,
-  jobLocationChangeHandler, 
+  jobLocation,
+  jobLocationChangehandler,
+  jobUrl,
   jobUrlChangeHandler,
+  hours,
   hoursChangeHandler,
+  minSalary,
   minSalaryChangeHandler,
+  maxSalary,
   maxSalaryChangeHandler,
+  level,
   levelChangeHandler,
   save,
-  clear
+  clear,
+  show,
 }) => {
-  // create state for each form group
-  // const [jobTitle, setJobTitle] = useState("");
-  // const [companyName, setCompanyName] = useState("");
-  // const [selectedStatus, setSelectedStatus] = useState("");
-  // const [jobLocation, setJobLocation] = useState("");
-  // const [jobUrl, setJobUrl] = useState("");
-  // const [hours, setHours] = useState("");
-  // const [minSalary, setMinSalary] = useState("");
-  // const [maxSalary, setMaxSalary] = useState("");
-  // const [level, setLevel] = useState("");
-
-  // // declare 'clear' function that will reset to default
-  // const clear = () => {
-  //   setJobTitle("");
-  //   setCompanyName("");
-  //   setJobLocation("");
-  //   setJobUrl("");
-  //   setMinSalary("");
-  //   setMaxSalary("");
-  //   setLevel("");
-  //   setHours("");
-  //   props.onHide();
-  // };
-
-  // declare 'save' function to save inputted info
-  // const save = (e) => {
-  //   e.preventDefault();
-  //   const payload = {
-  //     title: jobTitle,
-  //     company: companyName,
-  //     status: selectedStatus,
-  //     location: jobLocation,
-  //     url: jobUrl,
-  //     minSalary: minSalary,
-  //     maxSalary: maxSalary,
-  //     level: level,
-  //     hours: hours,
-  //   };
-
-  //   console.log("hello");
-
-  //   axios
-  //     .post("http://localhost:3000/listing/", payload)
-  //     .then((res) => {})
-  //     .catch((err) => console.log(err));
-  // };
-
   return (
-    <Modal  size="lg" onHide={clear}>
+    <Modal show={show} size="lg" onHide={clear}>
       <Form onSubmit={save}>
         <Modal.Header closeButton>
           <Modal.Title id="addJobModal">Add a new job</Modal.Title>
@@ -157,7 +110,7 @@ const AddJobModal = ({
               placeholder="Enter location"
               value={jobLocation}
               required
-              onChange={jobLocationChangeHandler}
+              onChange={jobLocationChangehandler}
             />
           </Form.Group>
 

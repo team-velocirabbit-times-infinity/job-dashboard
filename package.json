@@ -7,7 +7,14 @@
     "start": "webpack serve --mode development --config webpack.config.js & nodemon server/server.js",
     "build": "webpack --mode production --config webpack.config.js",
     "dev": "webpack --mode development --config webpack.config.js",
-    "server": "nodemon server/server.js"
+    "server": "nodemon server/server.js",
+    "test": "NODE_ENV=test jest --testTimeout=10000  --detectOpenHandles"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "keywords": [],
   "author": "",

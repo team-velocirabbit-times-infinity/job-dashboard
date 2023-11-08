@@ -53,8 +53,8 @@ Harold Reeves
 Lanlan Zhao
 [@GitHub](https://github.com/philzmintmojito)
 
-Rui
-[@GitHub](https://github.com/)
+Rui Fan
+[@GitHub](https://github.com/ruifan-IU)
 
-William
-[@GitHub](https://github.com/)
+William Kil
+[@GitHub](https://github.com/shinykoin)

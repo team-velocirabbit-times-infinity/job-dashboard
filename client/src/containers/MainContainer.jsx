@@ -1,5 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import React from 'react';
+import { useState, useEffect } from 'react';
 // import Row from 'react-bootstrap/Row';
 // import Col from 'react-bootstrap/Col';
 
@@ -8,6 +9,7 @@ import CategoryFilterContainer from './CategoryFilterContainer';
 import JobListingContainer from './JobListingContainer';
 
 function MainContainer() {
+
   return (
     <Container>
       <SearchContainer />

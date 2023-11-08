@@ -12,17 +12,17 @@ import AddJobModal from './AddJobModal';
 
 const SearchContainer = () => {
   // create State to show AddJobModal
-  const [showAddJobModal, setShowAddJobModal] = useState(false);
+  // const [showAddJobModal, setShowAddJobModal] = useState(false);
   // create State for input in Search
   const [input, setInput] = useState('');
 
 
   return (
     <>
-      <AddJobModal
+      {/* <AddJobModal
         show={showAddJobModal}
         onHide={() => setShowAddJobModal(false)}
-      />
+      /> */}
 
       <Stack direction='horizontal' gap={3}>
         <Form.Control 
@@ -31,7 +31,7 @@ const SearchContainer = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <Button 
+        {/* <Button 
           className='float-end'
           size='md'
           variant='primary'
@@ -39,7 +39,7 @@ const SearchContainer = () => {
           onClick={() => setShowAddJobModal(true)}
         >
           Add New Job
-        </Button>
+        </Button> */}
       </Stack>
     </>
   );

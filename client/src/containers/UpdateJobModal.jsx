@@ -4,8 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
-const UpdateJobModal = (props) => {
-  const { company, status, location, url, minsalary, maxsalary, level, hours, listingid, title } = props.props;
+const UpdateJobModal = ({job, showUpdateModal, updateJob, onSave, onHide}) => {
+  const { company, status, location, url, minsalary, maxsalary, level, hours, listingid, title } = job;
 
   // create state for each form group
   const [jobTitle, setJobTitle] = useState(title);
@@ -18,6 +18,7 @@ const UpdateJobModal = (props) => {
   const [MINSALARY, setMinSalary] = useState(minsalary);
   const [MAXSALARY, setMaxSalary] = useState(maxsalary);
   const [LEVEL, setLevel] = useState(level);
+  
 
   // declare 'clear' function that will reset to default
   const clear = () => {
@@ -29,11 +30,11 @@ const UpdateJobModal = (props) => {
     setMaxSalary('');
     setLevel('');
     setHours('');
-    props.onHide();
+    onHide();
   };
 
   // declare 'save' function to save inputted info
-  const save = (e) => {
+  const update = (e) => {
     e.preventDefault();
     const payload = {
       title: jobTitle,
@@ -51,12 +52,26 @@ const UpdateJobModal = (props) => {
 
     axios
       .put(`http://localhost:3000/listing/${listingid}`, payload)
+      .then(res => {
+        updateJob(listingid, {
+          title: jobTitle,
+          company: companyName,
+          status: selectedStatus,
+          location: jobLocation,
+          url: jobUrl,
+          minsalary: MINSALARY,
+          maxsalary: MAXSALARY,
+          level: LEVEL,
+          hours: HOURS,
+          listingid: listingid
+        })
+       onSave()})
       .catch((err) => console.log(err));
   };
 
   return (
-    <Modal {...props} size='lg' onHide={clear}>
-      <Form onSubmit={save}>
+    <Modal size='lg' show={showUpdateModal} onHide={clear}>
+      <Form onSubmit={update}>
         <Modal.Header closeButton>
           <Modal.Title id='updateJobModal'>Update Job Entry</Modal.Title>
         </Modal.Header>

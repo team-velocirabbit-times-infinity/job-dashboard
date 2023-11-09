@@ -1,10 +1,8 @@
-
-
+const bcrypt = require('bcrypt');
+require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
-// const PG_URI =
-//   'postgres://surqoxeu:WwLi5wRJoKuB1yOAWnfyjNRU7tky4jzz@bubble.db.elephantsql.com/surqoxeu';
-const PG_URI = 'postgres://pqyfyiwo:5dvI7otp5VseiJJVdnjNhhlq5yQpKoHY@bubble.db.elephantsql.com/pqyfyiwo';
-const sequelize = new Sequelize(PG_URI);
+
+const sequelize = new Sequelize(process.env.PG_URI);
 
 const User = sequelize.define('users', {
   firstname: DataTypes.STRING,
@@ -18,5 +16,16 @@ const User = sequelize.define('users', {
   },
   password: DataTypes.STRING,
 }, { timestamps: false });
+
+User.beforeCreate((user, options) => {
+
+  return bcrypt.hash(user.password, 5)
+      .then(hash => {
+          user.password = hash;
+      })
+      .catch(err => {
+          throw new Error();
+      });
+});
 
 module.exports = User;

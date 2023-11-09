@@ -19,28 +19,32 @@ We added testing, both for the existing components and infrastructure as well as
   - Login Authentication (TDD)
   - User Schema (TDD)
 
-We also added user CRUD-functionality with a schema, server routes, and controllers. Along with that comes designed login authentication and basic security protocols to protect both user and listing data in the database.
+We also improved user CRUD-functionality with a schema, server routes, and controllers. Along with that comes designed login authentication and basic security protocols to protect both user and listing data in the database.
 
 - Built a signup & a login page.
 - Built a User Schema and corrolating Controllers.
-- Built out login authentication (\*\*include aspects here).
+- Built out login authentication with password hashing for added security.
 
 ## Improvements:
 
-- Improved code quality by deleting nonfunctional code and creating consistent variable names for easier data flow tracking.
+- Improved code quality by deleting nonfunctional code and creating consistent data flow from the client to server, middleware, and database, and returning the correct information to the endpoint.
 - Improved functionality on dashboard by:
   - moving 'Add New Job' from next to search bar to on the top of the Listings Feed for better user-functionality
   - created automatic closing for the Job Modal once the 'Save' button is clicked
-  - getAllListings is now linked to a useState where the listings refresh and aree updated once the Job Modal closes
+  - getAllListings is now linked to a useState where the listings refresh and are updated once the Job Modal closes
+  - the Update button saves and automatically refreshes the listing with the new information
 - Improved user and listing data storage and retrieval by:
   - initilized a new database to connect with and sequelized our schemas for easier readability on queries
   - updated controllers for Listings, and created controllers for Users
+    -Added data security by:
+  - completed enviroment variable setup using env file to store the database connection point
+  - password hashing for login authentication
 
 ## Technology Used:
 
 - React
 - React Router
-- Redux
+- Jest/Supertest
 - PostgreSQL/Sequelized
 - Bootstrap
 - Express
@@ -48,10 +52,9 @@ We also added user CRUD-functionality with a schema, server routes, and controll
 
 ## Stretch Features:
 
--
--
--
--
+- Consistent UX design across all pages.
+- ESLint & Prettier standards added.
+- Test-driven development for new front-end components and added User Schema and Controllers.
 
 ## Contributors:
 

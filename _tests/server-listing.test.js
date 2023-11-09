@@ -36,17 +36,29 @@ describe('checking server routes', () => {
   // check post functionality
   describe('POST /', () => {
       // testing create data here:
+      // const testPost = {
+      //   "title": "Full Stack Dev",
+      //   "company": "Google",
+      //   "level": "Senior",
+      //   "hours": 40,
+      //   "minsalary": 100000,
+      //   "maxsalary": 250000,
+      //   "location": "California",
+      //   "status": "Applying",
+      //   "url": "goodjobs.com",
+      //   "userid": 143
+      // };
       const testPost = {
-        "title": "Full Stack Dev",
-        "company": "Google",
-        "level": "Senior",
-        "hours": 40,
-        "minsalary": 100000,
-        "maxsalary": 250000,
-        "location": "California",
-        "status": "Applying",
-        "url": "goodjobs.com",
-        "userid": 143
+        title: "Full Stack Dev",
+        company: "Google",
+        level: "Senior",
+        hours: 40,
+        minsalary: 100000,
+        maxsalary: 250000,
+        location: "California",
+        status: "Applying",
+        url: "goodjobs.com",
+        userid: 143
       };
 
       beforeEach(async () => {

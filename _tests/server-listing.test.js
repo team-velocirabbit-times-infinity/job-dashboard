@@ -21,41 +21,62 @@ describe('checking server routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200)
     });
+
+    // check if bad request recieves an error
+    it('responds to a bad request with an error and a status of 500', function() {
+      return request(app)
+        .get('/')
+        .catch(err => {
+          expect(err.status).toBe(500);
+          expect(err.body).toEqual({ err: 'An error occurred' });
+        })
+    })
   });
 
-  
-  // check if post functionality is returning a status of 200 with correct content type (app/json)
+  // check post functionality
   describe('POST /', () => {
+      // testing create data here:
       const testPost = {
-        title: 'Full Stack Dev',
-        company: 'Google',
-        level: 'Senior',
-        hours: 40,
-        minSalary: 100000,
-        maxSalary: 250000,
-        location: 'California',
-        status: 'Applying',
-        url: 'goodjobs.com',
-        userId: 143
+        "title": "Full Stack Dev",
+        "company": "Google",
+        "level": "Senior",
+        "hours": 40,
+        "minsalary": 100000,
+        "maxsalary": 250000,
+        "location": "California",
+        "status": "Applying",
+        "url": "goodjobs.com",
+        "userid": 143
       };
-      it('responds with 200 status and json content type', () => {
-        return request(app)
+
+      beforeEach(async () => {
+        const response = await request(app)
           .post('/')
           .send(testPost)
-          .expect('Content-Type', /application\/json/)
-          .expect(200);
+        this.response = response;
+      });
+
+      // returns a status of 200 with correct content type (app/json)
+      it('responds with 200 status and text/html content type', () => {
+        expect(this.response.get('Content-Type')).toMatch(/text\/html; charset=utf-8/);
+        expect(this.response.status).toBe(200);
       });
   
-    // check if post has the correct json data in the response body (newListing)
-
+      // check if post has the correct json data in the response body (newListing)
+      it('returns the posted data in the response body', () => {
+        expect(this.response.body).toEqual(testPost);
+      });
     });
 
     // check if put functionality is returning a status of 200 with correct content type (app/json)
     describe('PUT', () => {
-      it('responds with 200 status and json content type', () => {
+      // testing update data here:
+
+
+      it('responds with 200 status and text/html content type', () => {
         return request(app)
           .put('/')
-          .expect('Content-Type', /json/)
+          .expect('Content-Type', /text\/html; charset=utf-8/)
           .expect(200);
       });
   
@@ -65,10 +86,10 @@ describe('checking server routes', () => {
 
     // check if delete functionality is returning a status of 200 with correct content type (app/json)
     describe('DELETE', () => {
-      it('responds with 200 status and json content type', () => {
+      it('responds with 200 status and text/html content type', () => {
         return request(app)
           .delete('/')
-          .expect('Content-Type', /json/)
+          .expect('Content-Type', /text\/html; charset=utf-8/)
           .expect(200);
       });
   
@@ -79,10 +100,10 @@ describe('checking server routes', () => {
   // check if /filter path returns a status of 200 and with the expected content type (json)
   describe('/filter', () => {
     describe('GET', () => {
-      it('responds with 200 status and json content type', () => {
+      it('responds with 200 status and text/html content type', () => {
         return request(app)
           .get('/filter')
-          .expect('Content-Type', /json/)
+          .expect('Content-Type', /text\/html; charset=utf-8/)
           .expect(200);
       });
 

@@ -30,9 +30,9 @@ listingController.addListing = async (req, res, next) => {
     location,
     status,
     url,
-    userId,
+    userid,
   } = req.body;
-  await Listing.create({title, company, level, hours, minsalary, maxsalary, location, status, url, userId: 1})
+  await Listing.create({title, company, level, hours, minsalary, maxsalary, location, status, url, userid: 1})
   .then(data => {
     res.locals.newListing = data;
     next();

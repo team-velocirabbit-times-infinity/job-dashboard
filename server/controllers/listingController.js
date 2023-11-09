@@ -47,22 +47,36 @@ listingController.addListing = async (req, res, next) => {
   });
 }
 
-// listingController.updateListing = (req, res, next) => {
-//   //start
-//   const listingId = req.query.id;
-//   const {
-//     title,
-//     company,
-//     level,
-//     hours,
-//     minSalary,
-//     maxSalary,
-//     location,
-//     status,
-//     url,
-//     // userId,
-//   } = req.body;
+listingController.updateListing = async (req, res, next) => {
 
+  const listingid = req.params.id;
+  const {
+    title,
+    company,
+    level,
+    hours,
+    minsalary,
+    maxsalary,
+    location,
+    status,
+    url,
+    // userId,
+  } = req.body;
+
+  await Listing.update({title, company, level, hours, minsalary, maxsalary, location, status, url, userId: 1}, {where: {listingid}})
+  .then(data => {
+    res.locals.updatedListing = data;
+    next();
+  })
+  .catch((err) => {
+    console.log(err);
+    return next({
+      log: 'listingController.updateListing',
+      status: 500,
+      message: {err: "couldn't update listing"},
+    });
+  });
+}
 //   console.log('req.query = ', req.query);
 //   console.log('req.body = ', req.body);
 //   const updateQuery = `
@@ -110,11 +124,11 @@ listingController.addListing = async (req, res, next) => {
 //start
 
 listingController.deleteListing = async (req, res, next) => {
-  const listingId = req.query.id;
+  const listingid = req.query.id;
   await Listing.findAll({
-    where: {listingId}
+    where: {listingid}
     }).then((deletedEntry) => {
-      Listing.destroy({where: {listingId}})
+      Listing.destroy({where: {listingid}})
            .then((_) => {res.locals.deletedListing = deletedEntry; return next();});
  }).catch((err) => {
         return next({
@@ -125,29 +139,7 @@ listingController.deleteListing = async (req, res, next) => {
       });
 
 }
-//   console.log(`listingId = `, listingId);
-//   const deleteQuery = `
-//   DELETE FROM listings
-//   WHERE "listingId" = $1
-//   RETURNING *;
-//   `;
-//   const params = [listingId];
-//   db.query(deleteQuery, params)
-//     .then((data) => {
-//       console.log('Deleted data looks like this: ', data.rows[0]);
-//       console.log(`${data.rowCount} row(s) deleted`);
-//       res.locals.deletedListing = data.rows[0];
-//       return next();
-//     })
-//     .catch((err) => {
-//       return next({
-//         log: 'listingController.deleteListing',
-//         status: 500,
-//         message: {err: "couldn't delete selected listing"},
-//       });
-//     });
-// };
-// //end
+
 
 // // need a filter middleware, need to ask front end how it will looks like
 // listingController.filterListing = (req, res, next) => {

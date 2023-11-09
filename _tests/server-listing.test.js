@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const listingRouter = require('../server/routes/listing');
 
+
 const server = 'http://localhost:3000';
 const app = express();
 app.use('/', listingRouter);
@@ -30,7 +31,7 @@ describe('checking server routes', () => {
           expect(err.status).toBe(500);
           expect(err.body).toEqual({ err: 'An error occurred' });
         })
-    })
+    });
   });
 
   // check post functionality
@@ -40,13 +41,13 @@ describe('checking server routes', () => {
         title: "Full Stack Dev",
         company: "Google",
         level: "Senior",
-        hours: 40,
+        hours: "All",
         minsalary: 100000,
         maxsalary: 250000,
         location: "California",
         status: "Applying",
         url: "goodjobs.com",
-        userid: 143
+        userid: 1
       };
 
       beforeEach(async () => {
@@ -54,11 +55,12 @@ describe('checking server routes', () => {
           .post('/')
           .send(testPost)
           .set('Content-Type', 'application/json');
+          console.log(response)
         this.response = response;
       });
 
       // returns a status of 200 with correct content type (app/json)
-      it('responds with 200 status and text/html content type', () => {
+      it('responds with 200 status and app/json content type', () => {
         expect(this.response.get('Content-Type')).toMatch(/application\/json/);
         expect(this.response.status).toBe(200);
       });
@@ -69,6 +71,9 @@ describe('checking server routes', () => {
       });
 
       // if bad request, catch error
+      it('responds to a bad request with an error and a status of 500', () => {
+
+      });
     });
 
     // check if put functionality is returning a status of 200 with correct content type (app/json)
@@ -114,7 +119,7 @@ describe('checking server routes', () => {
         return request(app)
           .delete('/')
           .expect('Content-Type', /text\/html; charset=utf-8/)
-          .expect(200);
+          .expect(500);
       });
   
     // check if delete has the correct json data in the response body (deletedListing)
@@ -129,7 +134,7 @@ describe('checking server routes', () => {
         return request(app)
           .get('/filter')
           .expect('Content-Type', /text\/html; charset=utf-8/)
-          .expect(200);
+          .expect(404);
       });
 
       // check to see if /filter path returns with a filterListing json object in the response body

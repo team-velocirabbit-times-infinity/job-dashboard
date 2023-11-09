@@ -5,7 +5,7 @@ const path = require('path');
 const listingRouter = require('../server/routes/listing');
 
 const server = 'http://localhost:3000';
-const app = new express();
+const app = express();
 app.use('/', listingRouter);
 
 // docs: https://www.npmjs.com/package/supertest
@@ -36,18 +36,6 @@ describe('checking server routes', () => {
   // check post functionality
   describe('POST /', () => {
       // testing create data here:
-      // const testPost = {
-      //   "title": "Full Stack Dev",
-      //   "company": "Google",
-      //   "level": "Senior",
-      //   "hours": 40,
-      //   "minsalary": 100000,
-      //   "maxsalary": 250000,
-      //   "location": "California",
-      //   "status": "Applying",
-      //   "url": "goodjobs.com",
-      //   "userid": 143
-      // };
       const testPost = {
         title: "Full Stack Dev",
         company: "Google",
@@ -65,12 +53,13 @@ describe('checking server routes', () => {
         const response = await request(app)
           .post('/')
           .send(testPost)
+          .set('Content-Type', 'application/json');
         this.response = response;
       });
 
       // returns a status of 200 with correct content type (app/json)
       it('responds with 200 status and text/html content type', () => {
-        expect(this.response.get('Content-Type')).toMatch(/text\/html; charset=utf-8/);
+        expect(this.response.get('Content-Type')).toMatch(/application\/json/);
         expect(this.response.status).toBe(200);
       });
   
@@ -78,22 +67,45 @@ describe('checking server routes', () => {
       it('returns the posted data in the response body', () => {
         expect(this.response.body).toEqual(testPost);
       });
+
+      // if bad request, catch error
     });
 
     // check if put functionality is returning a status of 200 with correct content type (app/json)
     describe('PUT', () => {
       // testing update data here:
+      const testUpdate = {
+        title: "Full Stack Dev",
+        company: "Google",
+        level: "Senior",
+        hours: 40,
+        minsalary: 100000,
+        maxsalary: 250000,
+        location: "California",
+        status: "Applying",
+        url: "goodjobs.com",
+        userid: 143
+      };
 
+      beforeEach(async () => {
+        const response = await request(app)
+          .put('/')
+          .send(testUpdate)
+          .set('Content-Type', 'application/json');
+        this.response = response;
+      });
 
       it('responds with 200 status and text/html content type', () => {
-        return request(app)
-          .put('/')
-          .expect('Content-Type', /text\/html; charset=utf-8/)
-          .expect(200);
+        expect(this.response.get('Content-Type')).toMatch(/application\/json/);
+        expect(this.response.status).toBe(200);
       });
   
-    // check if put has the correct json data in the response body (updatedListing)
+      // check if put has the correct json data in the response body (updatedListing)
+      it('returns the posted data in the response body', () => {
+        expect(this.response.body).toEqual(testUpdate);
+      });
 
+      // if bad request, catch error
     });
 
     // check if delete functionality is returning a status of 200 with correct content type (app/json)
@@ -106,7 +118,8 @@ describe('checking server routes', () => {
       });
   
     // check if delete has the correct json data in the response body (deletedListing)
-
+    
+    // if bad request, catch error
   })
 
   // check if /filter path returns a status of 200 and with the expected content type (json)
@@ -123,6 +136,8 @@ describe('checking server routes', () => {
       it('filtered listings are returned in the response body', () => {
 
       });
+
+      // if bad request, catch error
     });
   })
 });

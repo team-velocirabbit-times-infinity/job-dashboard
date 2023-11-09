@@ -18,10 +18,11 @@ router.post('/', listingController.addListing, (req, res) => {
   return res.status(200).json(res.locals.newListing);
 });
 
-// //start
+//start
 router.put('/:id', listingController.updateListing, (req, res) => {
   return res.status(200).json(res.locals.updatedListing);
 });
+
 router.delete('/', listingController.deleteListing, (req, res) => {
   return res.status(200).json(res.locals.deletedListing)
 })

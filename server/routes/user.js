@@ -17,9 +17,9 @@ usersRouter.post('/', userController.addUser, (req, res) => {
 });
 
 // // user login
-// usersRouter.post('/login', userController.verifyUser, (req, res) => {
-//   return res.status(200).json(res.locals.user);
-// });
+usersRouter.post('/login', userController.verifyUser, (req, res) => {
+  return res.status(200).json(res.locals.user);
+});
 
 //update and delete user function maybe in strech feature.
 // router.put('/', userController.updateuser, (req, res) => {

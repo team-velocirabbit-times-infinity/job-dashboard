@@ -1,7 +1,9 @@
 const User = require('../models/userModel');
+const bcrypt = require('bcrypt');
 
 const userController = {};
-userController.getAllUsers = async (req,res, next) => {
+
+userController.getAllUsers = async (req, res, next) => {
   await User.findAll()
   .then(users => {
     res.locals.users = users;
@@ -42,7 +44,26 @@ userController.addUser = async (req, res, next) => {
   });
 }
 
-  // default status is not started. userId hardcoded to 1 for now
+userController.verifyUser = async (req, res, next) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({where: {username}})
+  bcrypt.compare(password, user.password)
+  .then (verified => {
+    if (verified) res.locals.user = user;
+    else return res.json({message: 'username/passwords does not match'});
+    next();
+  })
+  .catch(err => {
+    console.log(err);
+    return next({
+      log: 'userController.verifyUser',
+      status: 500,
+      message: {err: "couldn't verify new user"},
+    });
+  })
+
+}
+
 
 
 

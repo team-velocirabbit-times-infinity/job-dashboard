@@ -29,7 +29,6 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
     "sequelize": "^6.34.0"
-
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",

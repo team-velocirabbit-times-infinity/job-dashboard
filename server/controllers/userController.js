@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 
 const userController = {};
-userController.getAllUsers = async (req,res, next) => {
+userController.getAllUsers = async (req, res, next) => {
   await User.findAll()
   .then(users => {
     res.locals.users = users;

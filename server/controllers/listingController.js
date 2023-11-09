@@ -124,11 +124,11 @@ listingController.updateListing = async (req, res, next) => {
 //start
 
 listingController.deleteListing = async (req, res, next) => {
-  const listingId = req.query.id;
+  const listingid = req.query.id;
   await Listing.findAll({
-    where: {listingId}
+    where: {listingid}
     }).then((deletedEntry) => {
-      Listing.destroy({where: {listingId}})
+      Listing.destroy({where: {listingid}})
            .then((_) => {res.locals.deletedListing = deletedEntry; return next();});
  }).catch((err) => {
         return next({

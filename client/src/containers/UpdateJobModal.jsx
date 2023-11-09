@@ -5,19 +5,19 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 const UpdateJobModal = (props) => {
-  const { company, status, location, url, minSalary, maxSalary, level, hours, listingId, title } = props.props;
+  const { company, status, location, url, minsalary, maxsalary, level, hours, listingid, title } = props.props;
 
   // create state for each form group
-  const [jobTitle, setJobTitle] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('');
-  const [jobLocation, setJobLocation] = useState('');
-  const [jobUrl, setJobUrl] = useState('');
+  const [jobTitle, setJobTitle] = useState(title);
+  const [companyName, setCompanyName] = useState(company);
+  const [selectedStatus, setSelectedStatus] = useState(status);
+  const [jobLocation, setJobLocation] = useState(location);
+  const [jobUrl, setJobUrl] = useState(url);
   // capitalized names to deal with same variable names
-  const [HOURS, setHours] = useState('');
-  const [MINSALARY, setMinSalary] = useState('');
-  const [MAXSALARY, setMaxSalary] = useState('');
-  const [LEVEL, setLevel] = useState('');
+  const [HOURS, setHours] = useState(hours);
+  const [MINSALARY, setMinSalary] = useState(minsalary);
+  const [MAXSALARY, setMaxSalary] = useState(maxsalary);
+  const [LEVEL, setLevel] = useState(level);
 
   // declare 'clear' function that will reset to default
   const clear = () => {
@@ -41,16 +41,16 @@ const UpdateJobModal = (props) => {
       status: selectedStatus,
       location: jobLocation,
       url: jobUrl,
-      minSalary: minSalary,
-      maxSalary: maxSalary,
-      level: level,
-      hours: hours,
+      minsalary: MINSALARY,
+      maxsalary: MAXSALARY,
+      level: LEVEL,
+      hours: HOURS,
     };
     
     console.log('hello')
 
     axios
-      .put(`http://localhost:3000/listing/?id=${listingId}`, payload)
+      .put(`http://localhost:3000/listing/${listingid}`, payload)
       .catch((err) => console.log(err));
   };
 
@@ -67,7 +67,7 @@ const UpdateJobModal = (props) => {
             <Form.Control
               type='text'
               name='jobTitle'
-              placeholder={title}
+              // placeholder={title}
               value={jobTitle}
               required
               onChange={(e) => setJobTitle(e.target.value)}
@@ -79,7 +79,7 @@ const UpdateJobModal = (props) => {
             <Form.Control
               type='text'
               name='companyName'
-              placeholder={company}
+              // placeholder={company}
               value={companyName}
               required
               onChange={(e) => setCompanyName(e.target.value)}
@@ -91,7 +91,7 @@ const UpdateJobModal = (props) => {
             <Form.Control
               type='text'
               name='inputLevel'
-              placeholder={level}
+              // placeholder={level}
               value={LEVEL}
               required
               onChange={(e) => setLevel(e.target.value)}
@@ -103,7 +103,7 @@ const UpdateJobModal = (props) => {
             <Form.Control
               type='text'
               name='inputHours'
-              placeholder={hours}
+              // placeholder={hours}
               value={HOURS}
               required
               onChange={(e) => setHours(e.target.value)}
@@ -135,7 +135,7 @@ const UpdateJobModal = (props) => {
             <Form.Control
               type='text'
               name='jobLocation'
-              placeholder={location}
+              // placeholder={location}
               value={jobLocation}
               required
               onChange={(e) => setJobLocation(e.target.value)}
@@ -147,7 +147,7 @@ const UpdateJobModal = (props) => {
             <Form.Control
               type='text'
               name='jobUrl'
-              placeholder={url}
+              // placeholder={url}
               value={jobUrl}
               onChange={(e) => setJobUrl(e.target.value)}
             />
@@ -158,7 +158,7 @@ const UpdateJobModal = (props) => {
             <Form.Control
               type='text'
               name='minSalary'
-              placeholder={minSalary}
+              // placeholder={minSalary}
               value={MINSALARY}
               onChange={(e) => setMinSalary(e.target.value)}
             />
@@ -169,7 +169,7 @@ const UpdateJobModal = (props) => {
             <Form.Control
               type='text'
               name='maxSalary'
-              placeholder={maxSalary}
+              // placeholder={maxSalary}
               value={MAXSALARY}
               onChange={(e) => setMaxSalary(e.target.value)}
             />

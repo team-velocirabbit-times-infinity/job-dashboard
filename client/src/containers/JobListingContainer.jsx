@@ -7,7 +7,7 @@ import axios from "axios";
 const JobListingContainer = () => {
   const [jobs, setJobs] = useState([]);
   const [showAddJobModal, setShowAddJobModal] = useState(false);
-  const [selectedJobId, setSelectedJobId] = useState(null);
+  const [selectedJob, setSelectedJob] = useState(null);
   const [showJobModal, setShowJobModal] = useState(false);
 
   const fetchData = async () => {
@@ -117,8 +117,8 @@ const JobListingContainer = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleShowModal = (jobId) => {
-    setSelectedJobId(jobId);
+  const handleShowModal = (job) => {
+    setSelectedJob(job);
     setShowJobModal(true);
   };
 
@@ -131,7 +131,9 @@ const JobListingContainer = () => {
       const index = prev.findIndex((ele) => ele.listingid === jobId);
       console.log(index)
       prev[index] = { ...prev[index], ...updates };
-      return [...prev];
+      const newArray = [...prev];
+      setSelectedJob(newArray[index])
+      return newArray;
     });
   };
 
@@ -141,10 +143,10 @@ const JobListingContainer = () => {
 
   return (
     <Container className="py-2 rounded bg-light">
-      {selectedJobId && (
+      {selectedJob && (
         <JobListingModal
           show={showJobModal}
-          selectedJob={jobs.find(ele => ele.listingid === selectedJobId)}
+          selectedJob={selectedJob}
           handleCloseModal={handleCloseModal}
           deleteJob={deleteJob}
           updateJob={updateJob}
@@ -195,7 +197,7 @@ const JobListingContainer = () => {
           key={job.listingid}
           className="job-listing-row mx-3 p-3 mb-2 bg-white rounded shadow"
           style={{ cursor: "pointer" }}
-          onClick={() => handleShowModal(job.listingid)}
+          onClick={() => handleShowModal(job)}
         >
           <Col>{job.title}</Col>
         </Row>

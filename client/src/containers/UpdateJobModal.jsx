@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
-const UpdateJobModal = ({job, show, updateJob, onSave, onHide}) => {
+const UpdateJobModal = ({job, showUpdateModal, updateJob, onSave, onHide}) => {
   const { company, status, location, url, minsalary, maxsalary, level, hours, listingid, title } = job;
 
   // create state for each form group
@@ -18,6 +18,7 @@ const UpdateJobModal = ({job, show, updateJob, onSave, onHide}) => {
   const [MINSALARY, setMinSalary] = useState(minsalary);
   const [MAXSALARY, setMaxSalary] = useState(maxsalary);
   const [LEVEL, setLevel] = useState(level);
+  
 
   // declare 'clear' function that will reset to default
   const clear = () => {
@@ -33,7 +34,7 @@ const UpdateJobModal = ({job, show, updateJob, onSave, onHide}) => {
   };
 
   // declare 'save' function to save inputted info
-  const save = (e) => {
+  const update = (e) => {
     e.preventDefault();
     const payload = {
       title: jobTitle,
@@ -64,13 +65,13 @@ const UpdateJobModal = ({job, show, updateJob, onSave, onHide}) => {
           hours: HOURS,
           listingid: listingid
         })
-        onSave()})
+       onSave()})
       .catch((err) => console.log(err));
   };
 
   return (
-    <Modal size='lg' show={show} onHide={clear}>
-      <Form onSubmit={save}>
+    <Modal size='lg' show={showUpdateModal} onHide={clear}>
+      <Form onSubmit={update}>
         <Modal.Header closeButton>
           <Modal.Title id='updateJobModal'>Update Job Entry</Modal.Title>
         </Modal.Header>

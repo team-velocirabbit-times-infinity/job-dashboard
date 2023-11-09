@@ -6,17 +6,7 @@ import UpdateJobModal from "./UpdateJobModal";
 const JobListingModal = ({ show, selectedJob, handleCloseModal, deleteJob, updateJob }) => {
   const [updateEntry, setUpdateEntry] = useState(false);
   const [showUpdateJobModal, setShowUpdateJobModal] = useState(false);
-  // const [title, updateTitle] = useState(selectedJob.title);
-  // const [company, updateCompany] = useState(selectedJob.company);
-  // const [level, updateLevel] = useState(selectedJob.level);
-  // const [hours, updateHours] = useState(selectedJob.hours);
-  // const [minsalary, updateMinsalary] = useState(selectedJob.minsalary);
-  // const [maxsalary, updateMaxsalary] = useState(selectedJob.maxsalary);
-  // const [location, updateLocation] = useState(selectedJob.location);
-  // const [status, updateStatus] = useState(selectedJob.status);
-  // const [url, updateUrl] = useState(selectedJob.url);
 
-  // const [job, setJob] = useState(selectedJob);
 
   const onSave = () => {
     setShowUpdateJobModal(false);
@@ -34,13 +24,15 @@ const JobListingModal = ({ show, selectedJob, handleCloseModal, deleteJob, updat
   };
 
   // add functionality to save edits
-  const save = () => {};
+  // const save = () => {
+  //   setShowUpdateJobModal(false);
+  // };
 
   return (
     <Modal show={show} onHide={handleCloseModal}>
       <UpdateJobModal
         job={selectedJob}
-        show={showUpdateJobModal}
+        showUpdateModal={showUpdateJobModal}
         updateJob={updateJob}
         onSave={onSave}
         onHide={() => {
@@ -48,7 +40,6 @@ const JobListingModal = ({ show, selectedJob, handleCloseModal, deleteJob, updat
         }}
       />
       <Modal.Header closeButton>
-        {/* <Modal.Title>{selectedJob ? selectedJob.position : ""}</Modal.Title> */}
         <Modal.Title>{selectedJob.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -69,8 +60,8 @@ const JobListingModal = ({ show, selectedJob, handleCloseModal, deleteJob, updat
         <Button variant="primary" onClick={() => setShowUpdateJobModal(true)}>
           Update Entry
         </Button>
-        <Button variant="success" onClick={save}>
-          Save
+        <Button variant="success" onClick={handleCloseModal}>
+          Done
         </Button>
       </Modal.Footer>
     </Modal>

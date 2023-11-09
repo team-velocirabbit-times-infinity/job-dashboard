@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Modal, Button } from "react-bootstrap";
 import JobListingModal from "./JobListingModal";
-import AddJobModal from "./AddJobModal.jsx"
+import AddJobModal from "./AddJobModal.jsx";
 import axios from "axios";
-
 
 const JobListingContainer = () => {
   const [jobs, setJobs] = useState([]);
   const [showAddJobModal, setShowAddJobModal] = useState(false);
-  const [selectedJob, setSelectedJob] = useState(null);
+  const [selectedJobId, setSelectedJobId] = useState(null);
   const [showJobModal, setShowJobModal] = useState(false);
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:3000/listing/');
+      const response = await fetch("http://localhost:3000/listing/");
       const data = await response.json();
       setJobs(data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -33,7 +32,7 @@ const JobListingContainer = () => {
   const [hours, setHours] = useState("");
   const [minSalary, setMinSalary] = useState("");
   const [maxSalary, setMaxSalary] = useState("");
-  const [level, setLevel] = useState("");  
+  const [level, setLevel] = useState("");
 
   const jobTitleChangeHandler = (e) => {
     setJobTitle(e.target.value);
@@ -49,7 +48,7 @@ const JobListingContainer = () => {
 
   const jobLocationChangehandler = (e) => {
     setJobLocation(e.target.value);
-  }
+  };
 
   const levelChangeHandler = (e) => {
     setLevel(e.target.value);
@@ -69,7 +68,7 @@ const JobListingContainer = () => {
 
   const maxSalaryChangeHandler = (e) => {
     setMaxSalary(e.target.value);
-  }; 
+  };
 
   const clear = () => {
     setJobTitle("");
@@ -84,7 +83,6 @@ const JobListingContainer = () => {
     // props.onHide();
   };
 
-
   const save = (e) => {
     e.preventDefault();
     const payload = {
@@ -97,7 +95,7 @@ const JobListingContainer = () => {
       maxsalary: maxSalary,
       level: level,
       hours: hours,
-      userid: 1
+      userid: 1,
     };
 
     console.log("hello");
@@ -119,28 +117,40 @@ const JobListingContainer = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleJobClick = (job) => {
-    setSelectedJob(job);
-  };
-
-  const handleShowModal = (job) => {
-    setSelectedJob(job);
+  const handleShowModal = (jobId) => {
+    setSelectedJobId(jobId);
     setShowJobModal(true);
   };
 
   const handleCloseModal = () => {
-    fetchData();
     setShowJobModal(false);
   };
 
+  const updateJob = (jobId, updates) => {
+    setJobs((prev) => {
+      const index = prev.findIndex((ele) => ele.listingid === jobId);
+      console.log(index)
+      prev[index] = { ...prev[index], ...updates };
+      return [...prev];
+    });
+  };
+
+  const deleteJob = (jobId) => {
+    setJobs((prev) => prev.filter((ele) => ele.listingid !== jobId));
+  };
+
   return (
-    <Container className="my-4">
-      <JobListingModal
-        show={showJobModal}
-        selectedJob={selectedJob}
-        handleCloseModal={handleCloseModal}
-      />
-      <Row className="bg-light p-3">
+    <Container className="py-2 rounded bg-light">
+      {selectedJobId && (
+        <JobListingModal
+          show={showJobModal}
+          selectedJob={jobs.find(ele => ele.listingid === selectedJobId)}
+          handleCloseModal={handleCloseModal}
+          deleteJob={deleteJob}
+          updateJob={updateJob}
+        />
+      )}
+      <Row className="p-3">
         <Col>
           <h3>Positions</h3>
         </Col>
@@ -183,8 +193,9 @@ const JobListingContainer = () => {
       {jobs.map((job) => (
         <Row
           key={job.listingid}
-          className="job-listing-row p-3 mb-2 bg-white rounded shadow"
-          onClick={() => handleShowModal(job)}
+          className="job-listing-row mx-3 p-3 mb-2 bg-white rounded shadow"
+          style={{ cursor: "pointer" }}
+          onClick={() => handleShowModal(job.listingid)}
         >
           <Col>{job.title}</Col>
         </Row>

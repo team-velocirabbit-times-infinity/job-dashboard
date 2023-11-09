@@ -4,8 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
-const UpdateJobModal = (props) => {
-  const { company, status, location, url, minsalary, maxsalary, level, hours, listingid, title } = props.props;
+const UpdateJobModal = ({job, show, updateJob, onSave, onHide}) => {
+  const { company, status, location, url, minsalary, maxsalary, level, hours, listingid, title } = job;
 
   // create state for each form group
   const [jobTitle, setJobTitle] = useState(title);
@@ -29,7 +29,7 @@ const UpdateJobModal = (props) => {
     setMaxSalary('');
     setLevel('');
     setHours('');
-    props.onHide();
+    onHide();
   };
 
   // declare 'save' function to save inputted info
@@ -51,11 +51,25 @@ const UpdateJobModal = (props) => {
 
     axios
       .put(`http://localhost:3000/listing/${listingid}`, payload)
+      .then(res => {
+        updateJob(listingid, {
+          title: jobTitle,
+          company: companyName,
+          status: selectedStatus,
+          location: jobLocation,
+          url: jobUrl,
+          minsalary: MINSALARY,
+          maxsalary: MAXSALARY,
+          level: LEVEL,
+          hours: HOURS,
+          listingid: listingid
+        })
+        onSave()})
       .catch((err) => console.log(err));
   };
 
   return (
-    <Modal {...props} size='lg' onHide={clear}>
+    <Modal size='lg' show={show} onHide={clear}>
       <Form onSubmit={save}>
         <Modal.Header closeButton>
           <Modal.Title id='updateJobModal'>Update Job Entry</Modal.Title>

@@ -93,10 +93,11 @@ const JobListingContainer = () => {
       status: selectedStatus,
       location: jobLocation,
       url: jobUrl,
-      minSalary: minSalary,
-      maxSalary: maxSalary,
+      minsalary: minSalary,
+      maxsalary: maxSalary,
       level: level,
       hours: hours,
+      userid: 1
     };
 
     console.log("hello");
@@ -128,7 +129,7 @@ const JobListingContainer = () => {
   };
 
   const handleCloseModal = () => {
-    // setSelectedJob(null);
+    fetchData();
     setShowJobModal(false);
   };
 
@@ -181,7 +182,7 @@ const JobListingContainer = () => {
       </Row>
       {jobs.map((job) => (
         <Row
-          key={job.listingId}
+          key={job.listingid}
           className="job-listing-row p-3 mb-2 bg-white rounded shadow"
           onClick={() => handleShowModal(job)}
         >

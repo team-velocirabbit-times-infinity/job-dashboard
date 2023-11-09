@@ -19,9 +19,9 @@ const JobListingModal = ({show, selectedJob, handleCloseModal}) => {
 
   // add delete functionality
   const deleteEntry = () => {
-    console.log('CLIENT SIDE LISTING ID', selectedJob.listingId);
+    console.log('CLIENT SIDE LISTING ID', selectedJob.listingid);
     axios
-      .delete(`http://localhost:3000/listing/?id=${selectedJob.listingId}`)
+      .delete(`http://localhost:3000/listing/?id=${selectedJob.listingid}`)
       .then(handleCloseModal)
       .catch((err) => console.log(err));
   };
@@ -47,8 +47,8 @@ const JobListingModal = ({show, selectedJob, handleCloseModal}) => {
         <p>Company: {selectedJob?.company || 'N/A'}</p>
         <p>Level: {selectedJob?.level || 'N/A'}</p>
         <p>Hours: {selectedJob?.hours || 'N/A'}</p>
-        <p>Minimum Salary: {selectedJob?.minSalary || 'N/A'}</p>
-        <p>Maximum Salary: {selectedJob?.maxSalary || 'N/A'}</p>
+        <p>Minimum Salary: {selectedJob?.minsalary || 'N/A'}</p>
+        <p>Maximum Salary: {selectedJob?.maxsalary || 'N/A'}</p>
         <p>Location: {selectedJob?.location || 'N/A'}</p>
         <p>Status: {selectedJob?.status || 'N/A'}</p>
         <p>URL: {selectedJob?.url || 'N/A'}</p>

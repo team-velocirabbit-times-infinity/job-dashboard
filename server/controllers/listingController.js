@@ -77,58 +77,15 @@ listingController.updateListing = async (req, res, next) => {
     });
   });
 }
-//   console.log('req.query = ', req.query);
-//   console.log('req.body = ', req.body);
-//   const updateQuery = `
-//   UPDATE listings
-//   SET
-//     title = $2,
-//     company = $3,
-//     level = $4,
-//     hours = $5,
-//     "minSalary" = $6,
-//     "maxSalary" = $7,
-//     location = $8,
-//     status = $9
-//   WHERE "listingId" = $1
-//   RETURNING *;
-//   `;
-//   const params = [
-//     listingId,
-//     title,
-//     company,
-//     level,
-//     hours,
-//     minSalary,
-//     maxSalary,
-//     location,
-//     status,
-//   ];
-//   db.query(updateQuery, params)
-//     .then((data) => {
-//       res.locals.updatedListing = data.rows[0];
-//       console.log('Updated data looks like this: ', data.rows[0]);
-//       console.log(`${data.rowCount} row(s) updated`);
-//       return next();
-//     })
-//     .catch((err) => {
-//       return next({
-//         log: 'listingController.updateListing',
-//         status: 500,
-//         message: {err: "couldn't update selected listing"},
-//       });
-//     });
-//   //end
-// };
 
 //start
 
 listingController.deleteListing = async (req, res, next) => {
-  const listingid = req.query.id;
+  const listingId = req.query.id;
   await Listing.findAll({
-    where: {listingid}
+    where: {listingId}
     }).then((deletedEntry) => {
-      Listing.destroy({where: {listingid}})
+      Listing.destroy({where: {listingId}})
            .then((_) => {res.locals.deletedListing = deletedEntry; return next();});
  }).catch((err) => {
         return next({

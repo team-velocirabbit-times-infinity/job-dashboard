@@ -79,6 +79,16 @@ listingController.updateListing = async (req, res, next) => {
   });
 }
 
+listingController.findTitle = (req, res, next) => {
+  const {title} = req.body;
+  Listing.findAll({
+    where: {title}
+  }).then(data => {
+    res.locals.jobs = data;
+    return next();
+  })
+}
+
 //start
 
 listingController.deleteListing = async (req, res, next) => {

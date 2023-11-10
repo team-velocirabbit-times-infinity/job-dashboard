@@ -9,8 +9,8 @@ function MainContainer() {
 
   return (
     <Container>
-      <SearchContainer />
-      <CategoryFilterContainer />
+      {/* <SearchContainer />
+      <CategoryFilterContainer /> */}
       <JobListingContainer />
     </Container>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Modal, Button } from "react-bootstrap";
 import JobListingModal from "./JobListingModal";
 import AddJobModal from "./AddJobModal.jsx";
+import CategoryFilterContainer from './CategoryFilterContainer.jsx'
 import axios from "axios";
 
 const JobListingContainer = () => {
@@ -141,8 +142,13 @@ const JobListingContainer = () => {
     setJobs((prev) => prev.filter((ele) => ele.listingid !== jobId));
   };
 
+  const updateJobs = (data) => {
+    setJobs(data);
+  }
+
   return (
     <Container className="py-2 rounded bg-light">
+      <CategoryFilterContainer updateJobs={updateJobs} fetchData={fetchData}/>
       {selectedJob && (
         <JobListingModal
           show={showJobModal}

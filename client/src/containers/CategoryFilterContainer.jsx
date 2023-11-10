@@ -1,19 +1,37 @@
 import React from 'react';
 import { Container, Form, Stack } from 'react-bootstrap';
 
-const CategoryFilterContainer = () => {
+const CategoryFilterContainer = ({ updateJobs, fetchData }) => {
+  const onSelect = (e) => { 
+    const title = e.target.value;
+    if (title === 'None') {
+      return fetchData();
+    }
+    fetch('http://localhost:3000/listing/title', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: title,
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      updateJobs(data);
+    })
+  }
+  
   return (
-
     <Container className="filterDiv my-3 p-3 bg-light rounded">
       <Stack direction="horizontal" gap={3}>
-
           <Form.Label>Title: </Form.Label>
-          <Form.Select id="Title">
+          <Form.Select id="Title" onChange={onSelect}>
             <option>None</option>
-            <option>Web Developer</option>
-            <option>Frontend Eng</option>
-            <option>Backend Eng</option>
-            <option>Fullstack Eng</option>
+            <option>Software Engineer</option>
+            <option>Frontend Developer</option>
+            <option>Backend Engineer</option>
+            <option>Fullstack Engineer</option>
           </Form.Select>
 
           <Form.Label>Company: </Form.Label>

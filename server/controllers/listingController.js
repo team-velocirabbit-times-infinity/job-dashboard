@@ -65,6 +65,7 @@ listingController.updateListing = async (req, res, next) => {
 
   await Listing.update({title, company, level, hours, minsalary, maxsalary, location, status, url, userId: 1}, {where: {listingid}})
   .then(data => {
+    console.log('updated', data)
     res.locals.updatedListing = data;
     next();
   })
@@ -81,11 +82,11 @@ listingController.updateListing = async (req, res, next) => {
 //start
 
 listingController.deleteListing = async (req, res, next) => {
-  const listingId = req.query.id;
+  const listingid = req.query.id;
   await Listing.findAll({
-    where: {listingId}
+    where: {listingid}
     }).then((deletedEntry) => {
-      Listing.destroy({where: {listingId}})
+      Listing.destroy({where: {listingid}})
            .then((_) => {res.locals.deletedListing = deletedEntry; return next();});
  }).catch((err) => {
         return next({
@@ -96,65 +97,5 @@ listingController.deleteListing = async (req, res, next) => {
       });
 
 }
-
-
-// // need a filter middleware, need to ask front end how it will looks like
-// listingController.filterListing = (req, res, next) => {
-//   // https://example.com/search?q=javascript&f=2, the req.query object would be { q: 'javascript', f: '2' }.
-//   const searchTerm = req.query.column;
-//   const filter = req.query.filter;
-//   console.log('searchTerm = ', searchTerm);
-
-//   const validColumns = [
-//     'listingId',
-//     'title',
-//     'company',
-//     'level',
-//     'hours',
-//     'minSalary',
-//     'location',
-//     'status',
-//   ];
-
-//   if (!validColumns.includes(searchTerm)) {
-//     return next({
-//       log: 'listingController.filterListing',
-//       status: 400,
-//       message: {err: 'Invalid search term'},
-//     });
-//   }
-
-//   let params = [`%${filter}%`];
-
-//   // ILIKE includes case-insensitive matching
-//   let filterQuery = `
-//     SELECT * FROM listings
-//     WHERE "${searchTerm}" ILIKE $1;
-//     `;
-
-//   // if filtering instead by salary, minSalary is case-sensitive and exact
-//   if (searchTerm === 'minSalary') {
-//     filterQuery = `
-//     SELECT * FROM listings
-//     WHERE "${searchTerm}" >= $1;
-//     `;
-//     params = [Number(filter)];
-//   }
-
-//   db.query(filterQuery, params)
-//     .then((data) => {
-//       res.locals.filteredListing = data.rows;
-//       console.log('filtered data looks like this: ', data.rows);
-//       return next();
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       return next({
-//         log: 'listingController.filterListing',
-//         status: 500,
-//         message: {err: "couldn't retrieve selected listing"},
-//       });
-//     });
-// };
 
 module.exports = listingController;

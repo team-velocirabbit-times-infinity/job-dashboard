@@ -26,6 +26,10 @@ router.put('/:id', listingController.updateListing, (req, res) => {
 router.delete('/', listingController.deleteListing, (req, res) => {
   return res.status(200).json(res.locals.deletedListing)
 })
+
+router.post('/title', listingController.findTitle, (req, res) => {
+  return res.status(200).json(res.locals.jobs);
+})
 //end
 
 module.exports = router;

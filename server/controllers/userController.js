@@ -47,6 +47,15 @@ userController.addUser = async (req, res, next) => {
 userController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
   const user = await User.findOne({where: {username}})
+  if (!user) {
+   res.locals.user = false;
+   return next();
+    // return next({
+    //   log: 'userController.verifyUser',
+    //   status: 500,
+    //   message: {err: "couldn't verify new user"},
+    // });
+  }
   bcrypt.compare(password, user.password)
   .then (verified => {
     if (verified) res.locals.user = user;

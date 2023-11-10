@@ -5,16 +5,31 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize(process.env.PG_URI);
 
 const User = sequelize.define('users', {
-  firstname: DataTypes.STRING,
-  lastname: DataTypes.STRING,
-  username: DataTypes.STRING,
-  email: DataTypes.STRING,
+  firstname: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  lastname: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   userid: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  password: DataTypes.STRING,
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 }, { timestamps: false });
 
 User.beforeCreate((user, options) => {
